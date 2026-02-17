@@ -100,7 +100,7 @@ Start building your streak today. At the **end of this year**, we'll see how far
 
 **Remember:** Don't clear your browser cache or history. Your streak depends on it!
 
-Let's see who can build the longest streak. **Happy tracked learning!** 🚀
+Let's see who can build the longest streak. **Happy Tracked learning!** 🚀
 
 ---
 

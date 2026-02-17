@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StreakBoard — Habit Tracker</title>
+    <link rel="stylesheet" href="habits.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Splash Screen -->
+    <div class="splash-screen" id="splashScreen">
+      <div class="splash-content">
+        <div class="splash-logo">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M22 12h-4l-3 9L9 3l-3 9H2"
+              stroke="url(#splashGrad2)"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <defs>
+              <linearGradient id="splashGrad2" x1="2" y1="3" x2="22" y2="21">
+                <stop stop-color="#c084fc" />
+                <stop offset="1" stop-color="#f472b6" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <h1 class="splash-title">StreakBoard</h1>
+        <p class="splash-tagline">Build consistency. One day at a time.</p>
+        <div class="splash-features">
+          <span class="splash-chip">📋 TaskFlow</span>
+          <span class="splash-chip">🔥 HabitFlow</span>
+          <span class="splash-chip">🍅 Pomodoro</span>
+        </div>
+        <div class="splash-loader">
+          <div class="splash-loader-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <header class="header">
+      <div class="header-left">
+        <div class="logo-row">
+          <div class="logo-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M22 12h-4l-3 9L9 3l-3 9H2"
+                stroke="url(#hlg1)"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <defs>
+                <linearGradient id="hlg1" x1="2" y1="3" x2="22" y2="21">
+                  <stop stop-color="#a78bfa" />
+                  <stop offset="1" stop-color="#ec4899" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div>
+            <h1>HabitFlow</h1>
+            <p class="subtitle">Build consistency. One day at a time.</p>
+          </div>
+        </div>
+      </div>
+      <div class="header-center">
+        <button class="btn-streak" id="streakBtn" aria-label="View streak">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span class="streak-count" id="streakCount">0</span>
+          <span class="streak-label">day streak</span>
+        </button>
+      </div>
+      <div class="header-right">
+        <a href="index.html" class="btn-back">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M19 12H5M12 19l-7-7 7-7"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          TaskFlow
+        </a>
+        <button class="btn-theme" id="themeToggle" aria-label="Toggle theme">
+          <svg
+            class="theme-icon-dark"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="5"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+          <svg
+            class="theme-icon-light"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            style="display: none"
+          >
+            <path
+              d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-icon si-total">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <rect
+              x="3"
+              y="3"
+              width="18"
+              height="18"
+              rx="3"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="M8 10h8M8 14h5"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-num" id="statTotal">0</span>
+          <span class="stat-label">Habits</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon si-done">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <circle
+              cx="12"
+              cy="12"
+              r="9"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="M8 12l3 3 5-5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-num" id="statDoneToday">0</span>
+          <span class="stat-label">Done Today</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon si-best">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M22 12h-4l-3 9L9 3l-3 9H2"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-num" id="statBestStreak">0</span>
+          <span class="stat-label">Best Streak</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon si-rate">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="M12 6v6l4 2"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-num" id="statCompletion">0%</span>
+          <span class="stat-label">Today's Rate</span>
+        </div>
+      </div>
+    </div>
+
+    <main class="main-content">
+      <section class="habits-section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M22 12h-4l-3 9L9 3l-3 9H2"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            This Week
+          </h2>
+          <span class="section-sub" id="weekRange"></span>
+        </div>
+        <div class="habits-grid" id="habitsContainer"></div>
+      </section>
+
+      <section
+        class="heatmap-section"
+        id="heatmapSection"
+        style="display: none"
+      >
+        <div class="section-header">
+          <h2 class="section-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <rect
+                x="3"
+                y="4"
+                width="18"
+                height="18"
+                rx="3"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <path d="M3 10h18" stroke="currentColor" stroke-width="2" />
+              <path
+                d="M8 2v4M16 2v4"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            Activity
+          </h2>
+          <span class="heat-range" id="heatRange"></span>
+        </div>
+        <div class="heat-graph-wrap">
+          <div class="heat-content">
+            <div class="heat-grid" id="heatmapGrid"></div>
+          </div>
+        </div>
+        <div class="heat-legend">
+          <span class="heat-leg-label">Less</span>
+          <div class="heat-leg-cell level-0"></div>
+          <div class="heat-leg-cell level-1"></div>
+          <div class="heat-leg-cell level-2"></div>
+          <div class="heat-leg-cell level-3"></div>
+          <div class="heat-leg-cell level-4"></div>
+          <span class="heat-leg-label">More</span>
+        </div>
+      </section>
+    </main>
+
+    <div class="empty-state" id="emptyState">
+      <div class="empty-icon-wrap">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <circle
+            cx="40"
+            cy="40"
+            r="36"
+            fill="rgba(139,92,246,.06)"
+            stroke="rgba(139,92,246,.15)"
+            stroke-width="1.5"
+          />
+          <path
+            d="M28 40h24M40 28v24"
+            stroke="rgba(139,92,246,.3)"
+            stroke-width="2.5"
+            stroke-linecap="round"
+          />
+        </svg>
+      </div>
+      <h3 class="empty-title">No habits yet</h3>
+      <p class="empty-desc">
+        Click <span class="hl">+ New Habit</span> to start building your routine
+      </p>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal" role="dialog" aria-modal="true">
+        <div class="modal-header">
+          <h2>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              style="vertical-align: -2px; margin-right: 6px"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="var(--accent-purple)"
+                stroke-width="2"
+              />
+              <path
+                d="M8 12h8M12 8v8"
+                stroke="var(--accent-purple)"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            New Habit
+          </h2>
+          <button
+            class="modal-close"
+            id="modalCloseBtn"
+            aria-label="Close modal"
+          >
+            &times;
+          </button>
+        </div>
+        <form id="habitForm" novalidate>
+          <div class="form-group">
+            <label for="habitName">Habit Name</label>
+            <input
+              type="text"
+              id="habitName"
+              placeholder="e.g., Read 30 minutes"
+              required
+              autocomplete="off"
+            />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="habitIcon">Icon</label>
+              <select id="habitIcon">
+                <option value="📚">📚 Study</option>
+                <option value="💪">💪 Exercise</option>
+                <option value="💧">💧 Water</option>
+                <option value="🧘">🧘 Meditate</option>
+                <option value="✍️">✍️ Write</option>
+                <option value="💻">💻 Code</option>
+                <option value="🎨">🎨 Create</option>
+                <option value="🏃">🏃 Run</option>
+                <option value="😴">😴 Sleep</option>
+                <option value="🍎">🍎 Eat Healthy</option>
+                <option value="⭐">⭐ Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="habitColor">Color</label>
+              <select id="habitColor">
+                <option value="#3b82f6">🔵 Blue</option>
+                <option value="#10b981">🟢 Green</option>
+                <option value="#f59e0b">🟡 Amber</option>
+                <option value="#ef4444">🔴 Red</option>
+                <option value="#8b5cf6">🟣 Purple</option>
+                <option value="#ec4899">💗 Pink</option>
+                <option value="#06b6d4">🩵 Cyan</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="habitFreq">Frequency</label>
+            <select id="habitFreq">
+              <option value="daily">Every day</option>
+              <option value="weekdays">Weekdays only</option>
+              <option value="weekends">Weekends only</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-create">Create Habit</button>
+            <button type="button" class="btn-cancel" id="cancelBtn">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <button class="fab" id="addHabitBtn" aria-label="New Habit">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <path
+          d="M11 3v16M3 11h16"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+        />
+      </svg>
+    </button>
+
+    <script src="habits.js"></script>
+  </body>
+</html>

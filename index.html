@@ -638,6 +638,7 @@
               id="taskDesc"
               placeholder="What do you want to accomplish?"
               rows="3"
+              required
             ></textarea>
           </div>
           <div class="form-row">
@@ -653,10 +654,8 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="taskDue"
-                >Due Date <span class="optional">(Optional)</span></label
-              >
-              <input type="date" id="taskDue" />
+              <label for="taskDue">Due Date</label>
+              <input type="date" id="taskDue" required />
             </div>
           </div>
           <div class="form-group">

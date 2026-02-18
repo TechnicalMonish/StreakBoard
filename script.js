@@ -159,6 +159,7 @@ function openModal() {
   currentSubtasks = [];
   renderFormSubtasks();
   taskForm.reset();
+  $("#taskDue").value = new Date().toISOString().split("T")[0];
   setTimeout(() => $("#taskTitle").focus(), 100);
 }
 function closeModal() {
@@ -310,13 +311,15 @@ function addSubtask() {
 function createTask(e) {
   e.preventDefault();
   const title = $("#taskTitle").value.trim();
-  if (!title) return;
+  const description = $("#taskDesc").value.trim();
+  const dueDate = $("#taskDue").value;
+  if (!title || !description || !dueDate) return;
   tasks.push({
     id: genId(),
     title,
-    description: $("#taskDesc").value.trim(),
+    description,
     category: $("#taskCategory").value,
-    dueDate: $("#taskDue").value || null,
+    dueDate,
     subtasks: currentSubtasks.map((t) => ({ text: t, done: false })),
     status: "tasks",
     createdAt: Date.now(),
